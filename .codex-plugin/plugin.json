@@ -11,7 +11,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "FirstPromoter",
-    "shortDescription": "Affiliate and referral programs",
+    "shortDescription": "Affiliate & referral programs",
     "longDescription": "Add FirstPromoter tracking to your app, answer affiliate support, payout and reporting questions from live data, and review affiliates for fraud.",
     "developerName": "FirstPromoter",
     "category": "Productivity",
