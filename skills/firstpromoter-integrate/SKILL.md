@@ -77,7 +77,7 @@ When FirstPromoter is already installed and "something isn't tracking", find the
 | No clicks at all | Wrong Account ID, script not on every public page, or blocked by ad blockers | Step 3; offer the proxy setup |
 | Clicks but no referrals | `fpr("referral")` missing, called before fpr.js loads, or cancelled by a redirect | Step 4 |
 | Referrals but few or no customers or sales | Billing provider not connected, still in test mode, or the billing customer's email/`uid` doesn't match the referral | Step 5; pass the billing customer ID as `uid` |
-| Sales but never any refunds | Refunds are not being sent (common with the Tracking API or custom billing), so commissions on refunded orders are never reversed | Send refunds via the refund endpoint, or connect a supported billing provider |
+| Sales but never any refunds | Refunds are not being sent, so commissions on refunded orders are never reversed. Common with the Tracking API or custom billing; expected with Braintree, whose integration does not track refunds | Send refunds via the Tracking API refund endpoint. For Stripe, Chargebee, Paddle or Recurly, check the provider connection |
 | Customers attributed to the wrong affiliate | Several referral calls per user, or a shared device | Check the referral's event log with `get_referral` |
 
 Report what you found with the numbers you saw, then fix only the broken step.

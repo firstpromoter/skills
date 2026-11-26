@@ -18,6 +18,8 @@ The program skills use the [FirstPromoter MCP server](https://docs.firstpromoter
 npx skills add firstpromoter/skills
 ```
 
+This installs the skills only. For `firstpromoter-manage-program` and `firstpromoter-fraud-review`, also [connect the MCP server](https://docs.firstpromoter.com/mcp/overview) in your agent.
+
 **Claude Code** (skills + MCP server):
 
 ```
@@ -31,11 +33,15 @@ npx skills add firstpromoter/skills
 codex plugin marketplace add firstpromoter/skills
 ```
 
+This registers the marketplace; then install **FirstPromoter** from the Codex plugins directory to get the skills and the MCP server.
+
 **GitHub Copilot:**
 
 ```bash
 gh skill install firstpromoter/skills
 ```
+
+This installs the skills only; [connect the MCP server](https://docs.firstpromoter.com/mcp/overview) for the program skills.
 
 **Cursor:** install **FirstPromoter** from the Cursor Marketplace, or copy `skills/` into `.cursor/skills/`.
 
