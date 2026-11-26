@@ -57,7 +57,7 @@ Call `fpr("referral", {email, uid})` **after** signup succeeds:
 ### 5. Sales tracking
 
 - **Supported billing provider**: connecting it is a dashboard step, not code. Tell the user to connect it at **Settings → Integrations**. In code, make sure the customer created in the billing provider has the same email (or the `uid` you sent) as the referral. For Stripe Checkout, Payment Links or Pricing Table, follow the matching Stripe page in the docs.
-- **Other or custom billing**: send a sale from the backend when payment is confirmed, using the Tracking API `POST /api/v2/track/sale` with the `Account-ID` header and `Authorization: Bearer <API key>`. `sale_amount` is in **cents**. Always send `event_id` (the transaction ID): it is required to avoid duplicate sales on retries. Track refunds too if the provider supports them.
+- **Other or custom billing**: send a sale from the backend when payment is confirmed, using the Tracking API `POST /api/v2/track/sale` with the `Account-ID` header and `Authorization: Bearer <API key>`. The required request fields are `event_id` (the transaction ID, which prevents duplicate sales on retries) and `amount` (in **cents**); also send the customer's `email` or `uid`. Check the [sale endpoint reference](https://docs.firstpromoter.com/api-reference-v2/api-admin/tracking-api/sales) for the current fields. Track refunds too if the provider supports them.
 
 ### 6. Test end to end
 

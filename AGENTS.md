@@ -18,7 +18,8 @@ plugin.json                # Agent Plugins manifest
 .codex-plugin/             # Codex plugin manifest
 .agents/plugins/           # Codex marketplace manifest (published, not agent guidance)
 .cursor-plugin/            # Cursor plugin manifest
-.mcp.json                  # bundled FirstPromoter MCP server (https://mcp.firstpromoter.com)
+.mcp.json                  # bundled FirstPromoter MCP server for Claude Code, Codex, Cursor
+mcp.json                   # same server in Agent Plugins format; keep both in sync
 assets/icon.png            # listing icon (square PNG)
 .github/workflows/sync-docs.yml  # on v* tags, syncs skills/ to docs.firstpromoter.com
 .agents/rules/             # rules for agents working in this repo (.claude/rules links here)

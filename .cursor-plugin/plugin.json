@@ -7,5 +7,5 @@
   "repository": "https://github.com/firstpromoter/skills",
   "license": "MIT",
   "skills": "./skills/",
-  "mcpServers": "../.mcp.json"
+  "mcpServers": "./.mcp.json"
 }

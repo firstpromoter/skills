@@ -34,7 +34,7 @@ Find affiliates and referrals that look like fraud or policy abuse, show the evi
 | **Refund and chargeback heavy** | `get_referral` event log shows refunds and disputes; `get_promoters_report` / `get_overview_report` give revenue vs refunds. Flag affiliates whose refund share is far above the program's. |
 | **Referrals without clicks** | `get_promoters_report` clicks vs referrals and customers. Many customers with zero or almost no tracked clicks can mean coupon leakage or cookie stuffing (or a legit coupon-only affiliate: check `list_promo_codes`). |
 | **Promo code leakage** | `list_promo_codes` for the affiliate, then their referral volume and timing. Sudden bursts from many unrelated customers suggest the code is on a coupon site. |
-| **Spikes** | `get_overview_report` grouped by day for the affiliate or campaign; a burst of signups or sales in a short window, especially followed by refunds. |
+| **Spikes** | For one affiliate, bucket their `list_referrals` by `created_at` day (the overview report is not filtered by promoter). For a campaign, `get_overview_report` with its `campaign_id`, grouped by day. Look for a burst of signups or sales in a short window, especially followed by refunds. |
 | **Fast cash-out pattern** | Large pending commissions (`list_commissions`) concentrated on new customers who refund or churn soon after, close to a payout date. |
 
 Paginate fully before computing rates; partial pages give wrong shares.
