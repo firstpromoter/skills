@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "firstpromoter",
+  "description": "Official FirstPromoter plugins for AI agents.",
+  "owner": { "name": "FirstPromoter", "url": "https://firstpromoter.com" },
+  "plugins": [
+    {
+      "name": "firstpromoter",
+      "description": "Integrate FirstPromoter affiliate tracking, run your affiliate program and review fraud.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

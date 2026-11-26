@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "firstpromoter": {
+      "type": "http",
+      "url": "https://mcp.firstpromoter.com"
+    }
+  }
+}

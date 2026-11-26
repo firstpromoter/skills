@@ -1,0 +1,25 @@
+name: Bug
+description: A skill gave wrong instructions or behaved badly.
+labels: [bug]
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      options: [firstpromoter-integrate, firstpromoter-manage-program, firstpromoter-fraud-review, plugin / install]
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and version
+      placeholder: e.g. Claude Code 2.4, Codex CLI, Cursor 3.1
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened and what you expected
+      description: Do not paste API keys or customer data.
+    validations:
+      required: true

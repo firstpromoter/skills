@@ -1,0 +1,11 @@
+{
+  "name": "firstpromoter",
+  "version": "1.0.0",
+  "description": "Integrate FirstPromoter affiliate tracking, run your affiliate program and review fraud.",
+  "author": { "name": "FirstPromoter", "url": "https://firstpromoter.com" },
+  "homepage": "https://docs.firstpromoter.com",
+  "repository": "https://github.com/firstpromoter/skills",
+  "license": "MIT",
+  "skills": "./skills/",
+  "mcpServers": "../.mcp.json"
+}
