@@ -39,6 +39,12 @@ Find affiliates and referrals that look like fraud or policy abuse, show the evi
 
 Paginate fully before computing rates; partial pages give wrong shares.
 
+**Use the program as the baseline.** Compute the program's own refund rate and clicks-per-customer first (`get_overview_report`), then flag affiliates far above it, rather than using fixed thresholds. Most affiliates have no refunds at all, so a handful with a large refund share stand out clearly.
+
+**Check that the signals exist before trusting a clean result.** If the program has sales but has never tracked a refund, refund-based checks are blind: report it as a setup gap (see the `firstpromoter-integrate` skill, "Diagnose an existing setup") instead of "no refund abuse found". Likewise, very few `suspicion` flags on a large program means "not detected", not "not happening".
+
+**Concentration.** When a few affiliates earn most of the revenue, review those first: a problem there costs the most.
+
 ## Report
 
 Return:

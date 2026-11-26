@@ -68,6 +68,20 @@ Walk the user through, and verify with MCP where available:
 3. Make a test purchase (Stripe test mode / test card); confirm the sale and commission appear (MCP `get_referral` shows the event log, `list_commissions`).
 4. Check the browser console for errors. Most failures are a wrong Account ID, the referral call running before fpr.js loaded, or an ad blocker (offer the proxy setup).
 
+## Diagnose an existing setup
+
+When FirstPromoter is already installed and "something isn't tracking", find the broken step from the data before touching code. With MCP, start with `get_integrations` (connection status, Stripe test/live mode, when the last click and referral were tracked), then `get_overview_report` for clicks, referrals, customers, sales and refunds over the last 30-90 days.
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| No clicks at all | Wrong Account ID, script not on every public page, or blocked by ad blockers | Step 3; offer the proxy setup |
+| Clicks but no referrals | `fpr("referral")` missing, called before fpr.js loads, or cancelled by a redirect | Step 4 |
+| Referrals but few or no customers or sales | Billing provider not connected, still in test mode, or the billing customer's email/`uid` doesn't match the referral | Step 5; pass the billing customer ID as `uid` |
+| Sales but never any refunds | Refunds are not being sent (common with the Tracking API or custom billing), so commissions on refunded orders are never reversed | Send refunds via the refund endpoint, or connect a supported billing provider |
+| Customers attributed to the wrong affiliate | Several referral calls per user, or a shared device | Check the referral's event log with `get_referral` |
+
+Report what you found with the numbers you saw, then fix only the broken step.
+
 ## Finish
 
 Summarize for the user: files changed, env vars they must set, dashboard steps still to do (billing connection), and the test results. Do not mark the integration done until a test referral and a test sale have been seen in FirstPromoter.

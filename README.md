@@ -43,10 +43,18 @@ gh skill install firstpromoter/skills
 
 ## Try it
 
-- "Integrate FirstPromoter tracking into this app."
-- "Is jane@example.com one of our affiliates, and which referrals are hers?"
-- "Who were our top 10 affiliates last month?"
-- "Review affiliates with pending payouts for fraud."
+What teams use these skills for most:
+
+| You want to... | Ask your agent |
+|---|---|
+| Set up tracking | "Integrate FirstPromoter tracking into this app." |
+| Fix tracking | "We get referrals but no sales in FirstPromoter. Find out why." |
+| Answer an affiliate | "Is jane@example.com one of our affiliates, and which referrals are hers?" |
+| Check a payout | "Why is this affiliate's payout still pending?" |
+| Report | "Who were our top 10 affiliates last month, and what share of revenue did they bring?" |
+| Keep a dashboard fresh | "Every Monday, summarize new referrals, customers and pending commissions." |
+| Screen applicants | "Review pending affiliate applications and summarize each one." |
+| Review fraud | "Review affiliates with pending payouts for self-referrals and refund abuse." |
 
 ## Docs
 

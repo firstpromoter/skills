@@ -47,6 +47,7 @@ Answer questions about the user's affiliate program from live data, and make cha
 - Top affiliates or campaigns for a period: `get_promoters_report`, `get_campaigns_report`.
 - Traffic: `get_urls_report`, `get_traffic_sources_report`. Quick snapshot: `get_dashboard_stats`, `get_dashboard_trending`.
 - State the date range and currency in every report. For a recurring sync or dashboard, reuse the same filters each run so numbers stay comparable.
+- Useful views people ask for: top affiliates and their share of revenue (`get_promoters_report`), affiliates who joined but never sent a click in the period (compare `list_promoters` with the report), new referrals since a date (`list_referrals` with `created_from`), and pending commissions per campaign (`list_commissions`).
 
 ### Screening applications
 
