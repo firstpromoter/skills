@@ -15,7 +15,7 @@
     "longDescription": "Add FirstPromoter tracking to your app, answer affiliate support, payout and reporting questions from live data, and review affiliates for fraud.",
     "developerName": "FirstPromoter",
     "category": "Productivity",
-    "capabilities": ["Instructions", "MCP"],
+    "capabilities": ["Interactive", "Read", "Write"],
     "websiteURL": "https://firstpromoter.com",
     "privacyPolicyURL": "https://firstpromoter.com/privacy",
     "logo": "./assets/icon.png",

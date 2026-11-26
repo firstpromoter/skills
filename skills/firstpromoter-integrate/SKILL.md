@@ -1,6 +1,6 @@
 ---
 name: firstpromoter-integrate
-description: Integrate FirstPromoter affiliate and referral tracking into a website or app. Use when adding FirstPromoter to a codebase, setting up click, signup/referral or sales tracking, connecting a billing provider (Stripe, Chargebee, Paddle, Recurly, Braintree) or the Tracking API, or debugging why clicks, referrals or sales are not being tracked.
+description: Integrate FirstPromoter affiliate and referral tracking into a website or app. Use when adding FirstPromoter to a codebase, setting up click, signup/referral or sales tracking, connecting a billing provider (Stripe, Chargebee, Paddle, Recurly, Braintree) or the Tracking API, or debugging why clicks, referrals or sales are not tracked (e.g. signups never show up as referrals, referral counts dropped after a deploy).
 license: MIT
 metadata:
   author: FirstPromoter
@@ -18,7 +18,8 @@ These docs are always more current than this skill. Fetch the page you need befo
 - Index of every docs page: https://docs.firstpromoter.com/llms.txt
 - Website integration guide: https://docs.firstpromoter.com/guides/integrate-your-website
 - fpr.js reference: https://docs.firstpromoter.com/script-docs/fpr-js-docs
-- Framework examples (Next.js, React, Vue...): https://docs.firstpromoter.com/integrations/tracking/custom/js
+- Custom tracking guides: https://docs.firstpromoter.com/integrations/tracking/custom/js (also `rails`, `django`, `php`, `supabase`, `stripe-checkout`, `paddle-checkout`)
+- Google Tag Manager: https://docs.firstpromoter.com/integrations/tracking/custom/gtm
 - Tracking without fpr.js (server only): https://docs.firstpromoter.com/guides/tracking-without-fprjs
 - Billing providers: https://docs.firstpromoter.com/integrations/billing/stripe (also `chargebee`, `paddle`, `recurly`, `braintree`, `api`)
 - Ad-blocker proxy: https://docs.firstpromoter.com/guides/proxy-setup
@@ -34,7 +35,10 @@ Find out, from the code, before asking anything:
 - **Framework and where `<head>` is rendered** (plain HTML, Next.js app/pages router, Nuxt, React/Vite SPA, Rails/Django templates, WordPress...).
 - **The signup success point**: the callback, server action or thank-you page that runs *after* a user account or lead is created.
 - **The billing provider**: look for `stripe`, `chargebee`, `paddle`, `recurly`, `braintree` SDKs, keys or webhooks.
-- **Whether marketing site and app are separate** (different repos or domains). Click tracking goes on every public page; referral tracking goes where signup completes.
+- **Whether marketing site and app are separate** (different repos or domains). Click tracking goes on every public page; referral tracking goes where signup completes. If signup happens on a different domain from the landing pages, carry the visitor across with `fpr("crossDomain", ...)` (fpr.js reference).
+- **Anything already installed**: an existing FirstPromoter snippet or `fpr("referral")` call, or another affiliate tracker (Rewardful, Tolt, PartnerStack...). Don't add a second snippet, and ask before removing another tracker.
+- **Content-Security-Policy** (framework config such as `next.config.js` headers, a `<meta>` tag, middleware, or host headers). If there is one, allow `https://cdn.firstpromoter.com` in `script-src` and `https://t.firstpromoter.com` in `connect-src` (or your proxy domain, if you use the proxy setup); otherwise the browser silently blocks tracking.
+- **Cookie consent tool**: load fpr.js under the category the site uses for marketing cookies, and tell the user that visitors who decline won't be tracked.
 
 ### 2. Get the Account ID
 
@@ -50,13 +54,13 @@ Add the fpr.js snippet from the website integration guide to the `<head>` of **e
 
 Call `fpr("referral", {email, uid})` **after** signup succeeds:
 
-- Pass the user's real email. Also pass `uid` when you have a stable ID at that point; prefer the billing provider's customer ID (for example the Stripe `cus_...` ID) so later sales match even if the email changes.
+- Pass the user's real email, and pass `uid` as your own user ID (it exists at signup). For Stripe, either set the same value as `fp_uid` in the Stripe customer's metadata, or use the `cus_...` ID if the customer already exists at signup. Don't create billing customers just for tracking.
 - Do not call it before the account exists, and do not redirect in the same tick: the browser can cancel the request. If the flow redirects immediately, put the call on the confirmation page.
 - Server-only signup flows: use the Tracking API signup endpoint from the backend instead (see "Tracking without fpr.js").
 
 ### 5. Sales tracking
 
-- **Supported billing provider**: connecting it is a dashboard step, not code. Tell the user to connect it at **Settings → Integrations**. In code, make sure the customer created in the billing provider has the same email (or the `uid` you sent) as the referral. For Stripe Checkout, Payment Links or Pricing Table, follow the matching Stripe page in the docs.
+- **Supported billing provider**: connecting it is a dashboard step, not code. Tell the user to connect it at **Settings → Integrations**. In code, make sure the customer created in the billing provider has the same email (or the `uid` you sent, e.g. as Stripe `fp_uid` metadata) as the referral. For Stripe Checkout, Payment Links or Pricing Table, follow the matching Stripe page in the docs. When a billing provider is connected, don't also send the same sales through the Tracking API, or they are counted twice.
 - **Other or custom billing**: send a sale from the backend when payment is confirmed, using the Tracking API `POST /api/v2/track/sale` with the `Account-ID` header and `Authorization: Bearer <API key>`. The required request fields are `event_id` (the transaction ID, which prevents duplicate sales on retries) and `amount` (in **cents**, except whole units for zero-decimal currencies such as JPY); also send the customer's `email` or `uid`. Check the [sale endpoint reference](https://docs.firstpromoter.com/api-reference-v2/api-admin/tracking-api/sales) for the current fields. Track refunds too if the provider supports them.
 
 ### 6. Test end to end
@@ -66,17 +70,23 @@ Walk the user through, and verify with MCP where available:
 1. Open an affiliate's referral link; confirm the click (MCP `get_integrations` shows when the last click was tracked).
 2. Sign up as a test user through that link; confirm a new lead appears (MCP `list_referrals`, newest first).
 3. Make a test purchase (Stripe test mode / test card); confirm the sale and commission appear (MCP `get_referral` shows the event log, `list_commissions`).
-4. Check the browser console for errors. Most failures are a wrong Account ID, the referral call running before fpr.js loaded, or an ad blocker (offer the proxy setup).
+4. Check the browser console for errors. Most failures are a wrong Account ID, a Content-Security-Policy blocking fpr.js, the referral call running before fpr.js loaded, or an ad blocker (offer the proxy setup).
+
+Test safely:
+
+- Use a test affiliate whose email differs from the test customer's, and don't test from the browser or network where you're logged in as that affiliate; otherwise the referral is flagged as a self-referral.
+- There is no sandbox. Stripe test-mode payments need a test-mode connection, and switching between test and live mode requires reconnecting.
+- Clean up by refunding the test payment and denying the test commission in the dashboard. Never use "Reset campaign" on a live campaign: it deletes all of its leads, customers, rewards and payouts.
 
 ## Diagnose an existing setup
 
-When FirstPromoter is already installed and "something isn't tracking", find the broken step from the data before touching code. With MCP, start with `get_integrations` (connection status, Stripe test/live mode, when the last click and referral were tracked), then `get_overview_report` for clicks, referrals, customers, sales and refunds over the last 30-90 days.
+When FirstPromoter is already installed and "something isn't tracking", find the broken step from the data before touching code. With MCP, start with `get_integrations` (read `connected`, not `status`; Stripe test/live mode; when the last click and referral were tracked), then `get_overview_report` for clicks, referrals, customers, sales and refunds over the last 30-90 days.
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| No clicks at all | Wrong Account ID, script not on every public page, or blocked by ad blockers | Step 3; offer the proxy setup |
+| No clicks at all | Wrong Account ID, script not on every public page, blocked by the site's Content-Security-Policy or a consent tool, or blocked by ad blockers | Steps 1 and 3; offer the proxy setup |
 | Clicks but no referrals | `fpr("referral")` missing, called before fpr.js loads, or cancelled by a redirect | Step 4 |
-| Referrals but few or no customers or sales | Billing provider not connected, still in test mode, or the billing customer's email/`uid` doesn't match the referral | Step 5; pass the billing customer ID as `uid` |
+| Referrals but few or no customers or sales | Billing provider not connected, still in test mode, or the billing customer's email/`uid` doesn't match the referral | Step 5; match the billing customer by email or `uid` (Stripe `fp_uid` metadata) |
 | Sales but never any refunds | Refunds are not being sent, so commissions on refunded orders are never reversed. Common with the Tracking API or custom billing; expected with Braintree, whose integration does not track refunds | Send refunds via the Tracking API refund endpoint. For Stripe, Chargebee, Paddle or Recurly, check the provider connection |
 | Customers attributed to the wrong affiliate | Several referral calls per user, or a shared device | Check the referral's event log with `get_referral` |
 

@@ -38,12 +38,12 @@ This registers the marketplace; then install **FirstPromoter** from the Codex pl
 **GitHub Copilot:**
 
 ```bash
-gh skill install firstpromoter/skills
+gh skill install firstpromoter/skills --all
 ```
 
-This installs the skills only; [connect the MCP server](https://docs.firstpromoter.com/mcp/overview) for the program skills.
+Requires gh 2.90 or later. This installs the skills only; [connect the MCP server](https://docs.firstpromoter.com/mcp/overview) for the program skills.
 
-**Cursor:** install **FirstPromoter** from the Cursor Marketplace, or copy `skills/` into `.cursor/skills/`.
+**Cursor:** copy `skills/` into `.cursor/skills/`, and [connect the MCP server](https://docs.firstpromoter.com/mcp/overview) for the program skills.
 
 **MCP only** (no skills): see [connect the MCP server](https://docs.firstpromoter.com/mcp/overview) for Claude, ChatGPT, Cursor and others.
 

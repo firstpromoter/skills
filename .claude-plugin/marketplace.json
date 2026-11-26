@@ -1,5 +1,5 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "firstpromoter",
   "description": "Official FirstPromoter plugins for AI agents.",
   "owner": { "name": "FirstPromoter", "url": "https://firstpromoter.com" },

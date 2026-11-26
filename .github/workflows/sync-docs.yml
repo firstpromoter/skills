@@ -1,5 +1,6 @@
 # On each release tag, open a PR in firstpromoter/docs that copies skills/ into
-# .mintlify/skills/, so docs.firstpromoter.com/skill.md serves these same skills.
+# .mintlify/skills/, so the docs site's skills discovery endpoints
+# (/.well-known/skills/) serve these same skills.
 # Needs secret DOCS_REPO_TOKEN: fine-grained token (or GitHub App token) with
 # contents + pull-requests write on firstpromoter/docs.
 name: Sync skills to docs
@@ -8,6 +9,9 @@ on:
   push:
     tags: ["v*"]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   sync:
