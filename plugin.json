@@ -66,8 +66,8 @@
             {
               "description": "Fraud signals before payout: checks referrals behind the largest pending commissions for fraud signals and reports the evidence.",
               "prompt": "Check the referrals behind my biggest pending commissions for fraud signals.",
-              "tools_triggered": "get_company_context, list_commissions, get_promoter, list_referrals",
-              "expected_behavior": "Groups pending commissions by affiliate, checks their referrals for signals such as FirstPromoter suspicion flags, self-referrals, duplicate signups or refunds, and reports each finding with the data and the program baseline. Does not rate affiliates, recommend action against a named affiliate, or block anyone."
+              "tools_triggered": "get_company_context, list_commissions, get_overview_report, get_promoter, list_referrals",
+              "expected_behavior": "Groups pending commissions by affiliate, gets the program baseline, and checks the referrals of every affiliate in that scope for signals such as FirstPromoter suspicion flags, self-referrals, duplicate signups or refunds. Reports one row per affiliate in the scope with each check result and the baseline. Does not rate affiliates, recommend action against a named affiliate, or block anyone."
             }
           ],
           "negative": [

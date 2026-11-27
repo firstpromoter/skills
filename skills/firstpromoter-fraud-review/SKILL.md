@@ -52,7 +52,7 @@ Paginate fully before computing rates; partial pages give wrong shares.
 Return:
 
 1. Scope and date range.
-2. A table of findings: affiliate ID, campaign, signal, evidence (counts, example referral or commission IDs, dates, the program baseline), innocent explanation if any. No risk rating or ranking column, and only affiliates with at least one finding.
+2. A table with one row per affiliate in the agreed scope, in the scope's order (for example by pending commission amount), whether or not anything was found: affiliate ID, campaign, the result of each check (counts, example referral or commission IDs, dates, the program baseline), innocent explanation if any. Don't leave out affiliates with no results, and don't add a risk rating or re-sort by results.
 3. The options the program has, once and in general: review in the dashboard, hold a payout, deny specific commissions, contact the affiliate, block on a campaign. Don't pick one for a specific affiliate.
 4. What you could not check (for example data outside the date range or tools not available).
 
