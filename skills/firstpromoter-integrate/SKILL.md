@@ -4,7 +4,7 @@ description: Integrate FirstPromoter affiliate and referral tracking into a webs
 license: MIT
 metadata:
   author: FirstPromoter
-  version: "1.0.0" # x-release-please-version
+  version: "1.1.0" # x-release-please-version
 ---
 
 # Integrate FirstPromoter
