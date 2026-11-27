@@ -41,7 +41,7 @@ Answer questions about the user's affiliate program from live data, and make cha
 ### Commissions and payouts
 
 - `list_commissions` by status, date range, campaign or promoter for "what is pending / approved / denied".
-- `list_payouts` for what was paid (cents). For "why is my payout stuck", combine the promoter's balances from `get_promoter` with their pending commissions and payout history, and point to the dashboard for the action.
+- `list_payouts` for what was paid (cents). For "why is my payout stuck", combine the promoter's balances from `get_promoter` with their pending commissions and payout history. The MCP does not return the program's payout terms (minimum payout amount, NET or custom due date), and a balance below the minimum or not yet due is normal, so ask the user to check them in the dashboard before calling it a problem, and point to the dashboard for the action.
 
 ### Reports and leaderboards
 

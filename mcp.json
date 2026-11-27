@@ -3,7 +3,20 @@
   "mcpServers": {
     "firstpromoter": {
       "type": "streamable-http",
-      "url": "https://mcp.firstpromoter.com"
+      "url": "https://mcp.firstpromoter.com",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "dcr"
+            },
+            "baseScopes": [
+              "mcp"
+            ]
+          }
+        }
+      }
     }
   }
 }
