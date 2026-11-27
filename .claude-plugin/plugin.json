@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "firstpromoter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Integrate FirstPromoter affiliate tracking, run your affiliate program and review fraud. Includes the FirstPromoter MCP server.",
   "author": {
     "name": "FirstPromoter",
