@@ -1,0 +1,36 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Skills are discoverable
+        run: npx -y skills add . --list
+
+      - name: Plugin and marketplace are valid
+        run: npx -y @anthropic-ai/claude-code plugin validate .
+
+      - name: Versions match
+        run: |
+          v=$(jq -r .version plugin.json)
+          for f in .claude-plugin/plugin.json .codex-plugin/plugin.json .cursor-plugin/plugin.json; do
+            test "$(jq -r .version "$f")" = "$v" || { echo "$f is not $v"; exit 1; }
+          done
+          for f in skills/*/SKILL.md; do
+            grep -q "version: \"$v\"" "$f" || { echo "$f is not $v"; exit 1; }
+          done
+          grep -q "^## $v " CHANGELOG.md || { echo "CHANGELOG.md has no $v entry"; exit 1; }

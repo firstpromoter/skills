@@ -1,0 +1,32 @@
+{
+  "name": "firstpromoter",
+  "version": "1.0.0",
+  "description": "Integrate FirstPromoter affiliate tracking, run your affiliate program and review fraud.",
+  "author": { "name": "FirstPromoter", "url": "https://firstpromoter.com" },
+  "homepage": "https://docs.firstpromoter.com",
+  "repository": "https://github.com/firstpromoter/skills",
+  "license": "MIT",
+  "keywords": ["affiliate", "referral", "partner-program", "firstpromoter", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "FirstPromoter",
+    "shortDescription": "Affiliate & referral programs",
+    "longDescription": "Manage your SaaS affiliate and referral program in FirstPromoter: add tracking to your app, answer affiliate support, commission, payout and reporting questions from live program data, screen affiliate applications, and review affiliates for fraud. Read-only by default; asks before every change.",
+    "developerName": "FirstPromoter",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://firstpromoter.com",
+    "supportURL": "https://help.firstpromoter.com",
+    "privacyPolicyURL": "https://firstpromoter.com/privacy",
+    "termsOfServiceURL": "https://firstpromoter.com/terms",
+    "logo": "./assets/icon.png",
+    "composerIcon": "./assets/icon.png",
+    "brandColor": "#1F2022",
+    "defaultPrompt": [
+      "Integrate FirstPromoter tracking into this app.",
+      "Who are my top affiliates this month?",
+      "Review affiliates with pending payouts for fraud."
+    ]
+  }
+}

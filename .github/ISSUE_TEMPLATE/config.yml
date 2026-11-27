@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/firstpromoter/skills/discussions
+    about: Ask how to use the skills or share ideas.
+  - name: Account or billing problem
+    url: https://help.firstpromoter.com/en/
+    about: For problems with your FirstPromoter account, use the help center or email support@firstpromoter.com.
