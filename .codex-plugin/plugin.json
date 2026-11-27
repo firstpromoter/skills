@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "FirstPromoter",
     "shortDescription": "Affiliate & referral programs",
-    "longDescription": "Manage your SaaS affiliate and referral program in FirstPromoter: add tracking to your app, answer affiliate support, commission, payout and reporting questions from live program data, screen affiliate applications, and review affiliates for fraud. Read-only by default; asks before every change.",
+    "longDescription": "Manage your SaaS affiliate and referral program in FirstPromoter: add tracking to your app, answer affiliate support, commission, payout and reporting questions from live program data, list pending applications, and check referrals and commissions for fraud signals. Read-only by default; asks before every change.",
     "developerName": "FirstPromoter",
     "category": "Productivity",
     "capabilities": [
@@ -39,7 +39,7 @@
     "defaultPrompt": [
       "Integrate FirstPromoter tracking into this app.",
       "Who are my top affiliates this month?",
-      "Review affiliates with pending payouts for fraud."
+      "Check pending commissions for fraud signals."
     ]
   },
   "extensions": {
@@ -66,16 +66,16 @@
               "expected_behavior": "Returns the amounts due per payout method in the account's currency and notes that payouts are sent from the FirstPromoter dashboard. Makes no changes."
             },
             {
-              "description": "Application screening: reviews pending affiliate applications and recommends accept or reject, without acting until the user confirms.",
-              "prompt": "Review my pending affiliate applications and tell me which ones look good.",
-              "tools_triggered": "get_company_context, list_promoters",
-              "expected_behavior": "Lists pending applicants with an accept or reject recommendation and the reason for each. Does not accept or reject anyone; asks the user to confirm the exact list before any change."
+              "description": "Pending applications: lists pending affiliate applications with their facts, without scoring or recommending, and changes nothing until the user names applicants and confirms.",
+              "prompt": "Show me my pending affiliate applications.",
+              "tools_triggered": "get_company_context, list_promoters, get_promoter",
+              "expected_behavior": "Lists each pending applicant with website, social links, country and application notes. Does not score, rank or recommend accepting or rejecting anyone, and accepts or rejects no one."
             },
             {
-              "description": "Fraud review before payout: checks the affiliates with the largest pending commissions for signs of fraud and shows the evidence.",
-              "prompt": "Review the affiliates with the biggest pending commissions for fraud.",
+              "description": "Fraud signals before payout: checks referrals behind the largest pending commissions for fraud signals and reports the evidence.",
+              "prompt": "Check the referrals behind my biggest pending commissions for fraud signals.",
               "tools_triggered": "get_company_context, list_commissions, get_promoter, list_referrals",
-              "expected_behavior": "Groups pending commissions by affiliate, checks the top affiliates' referrals for signals such as self-referrals, duplicate signups or refund-heavy customers, and reports findings with evidence. Does not block anyone without explicit confirmation."
+              "expected_behavior": "Groups pending commissions by affiliate, checks their referrals for signals such as FirstPromoter suspicion flags, self-referrals, duplicate signups or refunds, and reports each finding with the data and the program baseline. Does not rate affiliates, recommend action against a named affiliate, or block anyone."
             }
           ],
           "negative": [
