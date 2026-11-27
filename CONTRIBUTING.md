@@ -16,4 +16,4 @@ Thanks for helping improve the FirstPromoter skills.
 
 ## Releases
 
-Maintainers bump `version` in `plugin.json`, `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json` and each `SKILL.md`, update `CHANGELOG.md`, and push a `vX.Y.Z` tag. The tag also opens a PR that syncs `skills/` to [docs.firstpromoter.com](https://docs.firstpromoter.com/skill.md).
+Maintainers bump `version` in `plugin.json`, `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json` and each `SKILL.md`, update `CHANGELOG.md`, and push a `vX.Y.Z` tag.
