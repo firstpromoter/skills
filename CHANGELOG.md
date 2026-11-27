@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/firstpromoter/skills/compare/v1.0.1...v1.1.0) (2026-11-27)
+
+
+### Features
+
+* add OpenAI review test cases ([#3](https://github.com/firstpromoter/skills/issues/3)) ([284bf55](https://github.com/firstpromoter/skills/commit/284bf550947e411c412af44205101056a974fcf8))
+
 ## 1.0.0 - 2026-11-27
 
 - `firstpromoter-integrate`: add click, signup and sales tracking, connect billing, test end to end.

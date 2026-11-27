@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires the FirstPromoter MCP server (https://mcp.firstpromoter.com, OAuth with a FirstPromoter admin or team login).
 metadata:
   author: FirstPromoter
-  version: "1.0.0" # x-release-please-version
+  version: "1.1.0" # x-release-please-version
 ---
 
 # Fraud review for FirstPromoter
