@@ -5,8 +5,8 @@ Official [Agent Skills](https://agentskills.io) for [FirstPromoter](https://firs
 | Skill | What it does |
 |---|---|
 | [`firstpromoter-integrate`](skills/firstpromoter-integrate/SKILL.md) | Adds FirstPromoter click, signup and sales tracking to your website or app, connects billing, and tests a referral end to end. |
-| [`firstpromoter-manage-program`](skills/firstpromoter-manage-program/SKILL.md) | Answers affiliate support, commission, payout and reporting questions from live data, and screens applications. |
-| [`firstpromoter-fraud-review`](skills/firstpromoter-fraud-review/SKILL.md) | Reviews affiliates and referrals for self-referrals, duplicates, refund abuse, leaked codes and spikes. |
+| [`firstpromoter-manage-program`](skills/firstpromoter-manage-program/SKILL.md) | Answers affiliate support, commission, payout and reporting questions from live data, and lists pending applications. |
+| [`firstpromoter-fraud-review`](skills/firstpromoter-fraud-review/SKILL.md) | Checks referrals and commissions for self-referrals, duplicates, refunds, leaked codes and spikes, and reports the evidence. |
 
 The program skills use the [FirstPromoter MCP server](https://docs.firstpromoter.com/mcp/overview) (`https://mcp.firstpromoter.com`, OAuth with your FirstPromoter login). The plugin installs below connect it for you. Skills are read-only by default and ask before any change.
 
@@ -59,8 +59,8 @@ What teams use these skills for most:
 | Check a payout | "Why is this affiliate's payout still pending?" |
 | Report | "Who were our top 10 affiliates last month, and what share of revenue did they bring?" |
 | Keep a dashboard fresh | "Every Monday, summarize new referrals, customers and pending commissions." |
-| Screen applicants | "Review pending affiliate applications and summarize each one." |
-| Review fraud | "Review affiliates with pending payouts for self-referrals and refund abuse." |
+| Pending applications | "Show me pending affiliate applications with their website and country." |
+| Fraud signals | "Check pending commissions for self-referrals and refunds." |
 
 ## Docs
 
