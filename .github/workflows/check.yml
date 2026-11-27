@@ -33,4 +33,4 @@ jobs:
           for f in skills/*/SKILL.md; do
             grep -q "version: \"$v\"" "$f" || { echo "$f is not $v"; exit 1; }
           done
-          grep -q "^## $v " CHANGELOG.md || { echo "CHANGELOG.md has no $v entry"; exit 1; }
+          grep -qE "^## \[?${v}[] ]" CHANGELOG.md || { echo "CHANGELOG.md has no $v entry"; exit 1; }

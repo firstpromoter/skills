@@ -24,4 +24,4 @@ Thanks for helping improve the FirstPromoter skills.
 
 ## Releases
 
-Maintainers bump `version` in `plugin.json`, `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.cursor-plugin/plugin.json` and each `SKILL.md`, update `CHANGELOG.md`, and push a `vX.Y.Z` tag.
+Releases are automated with [release-please](https://github.com/googleapis/release-please). After each merge to `main` it opens or updates a release PR that picks the next version from the commit types (`fix` → patch, `feat` → minor, `!` → major), bumps `version` in every manifest and `SKILL.md`, and updates `CHANGELOG.md`. Merging that PR tags `vX.Y.Z` and publishes the GitHub Release. A new skill's `version` line needs the `# x-release-please-version` comment.
