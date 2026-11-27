@@ -20,7 +20,7 @@
     "privacyPolicyURL": "https://firstpromoter.com/privacy",
     "logo": "./assets/icon.png",
     "composerIcon": "./assets/icon.png",
-    "brandColor": "#2497F3",
+    "brandColor": "#1F2022",
     "defaultPrompt": [
       "Integrate FirstPromoter tracking into this app.",
       "Who are my top affiliates this month?",
