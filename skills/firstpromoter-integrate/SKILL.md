@@ -70,7 +70,7 @@ Walk the user through, and verify with MCP where available:
 1. Open an affiliate's referral link; confirm the click (MCP `get_integrations` shows when the last click was tracked).
 2. Sign up as a test user through that link; confirm a new lead appears (MCP `list_referrals`, newest first).
 3. Make a test purchase (Stripe test mode / test card); confirm the sale and commission appear (MCP `get_referral` shows the event log, `list_commissions`).
-4. Check the browser console for errors. Most failures are a wrong Account ID, a Content-Security-Policy blocking fpr.js, the referral call running before fpr.js loaded, or an ad blocker (offer the proxy setup).
+4. Check the browser console for errors. Most failures are a wrong Account ID, a Content-Security-Policy blocking fpr.js or its inline snippet, the inline snippet missing so `fpr` is undefined, or an ad blocker (offer the proxy setup).
 
 Test safely:
 
@@ -85,7 +85,7 @@ When FirstPromoter is already installed and "something isn't tracking", find the
 | Symptom | Likely cause | Fix |
 |---|---|---|
 | No clicks at all | Wrong Account ID, script not on every public page, blocked by the site's Content-Security-Policy or a consent tool, or blocked by ad blockers | Steps 1 and 3; offer the proxy setup |
-| Clicks but no referrals | `fpr("referral")` missing, called before fpr.js loads, or cancelled by a redirect | Step 4 |
+| Clicks but no referrals | `fpr("referral")` missing, the inline snippet missing (`fpr is not defined`), or cancelled by a redirect | Step 4 |
 | Referrals but few or no customers or sales | Billing provider not connected, still in test mode, or the billing customer's email/`uid` doesn't match the referral | Step 5; match the billing customer by email or `uid` (Stripe `fp_uid` metadata) |
 | Sales but never any refunds | Refunds are not being sent, so commissions on refunded orders are never reversed. Common with the Tracking API or custom billing; expected with Braintree, whose integration does not track refunds | Send refunds via the Tracking API refund endpoint. For Stripe, Chargebee, Paddle or Recurly, check the provider connection |
 | Customers attributed to the wrong affiliate | Several referral calls per user, or a shared device | Check the referral's event log with `get_referral` |
