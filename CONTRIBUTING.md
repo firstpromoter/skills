@@ -13,6 +13,14 @@ Thanks for helping improve the FirstPromoter skills.
 - Link to https://docs.firstpromoter.com for facts (endpoints, snippets, settings) instead of copying them, so skills stay correct when the product changes.
 - Skills that use the MCP server are read-only by default and must confirm every write.
 - Never include API keys, customer data or real affiliate data in examples.
+- Before opening a PR, run `claude plugin validate .` and `npx skills add . --list`.
+
+## Pull requests
+
+- Branch names: `{type}-{short-description}`, e.g. `fix-integrate-nextjs-snippet`.
+- PR titles follow Conventional Commits: `<type>: <description>` or `<type>(<skill>): <description>`, imperative, 50 characters or less. PRs are squash-merged, so the title becomes the commit message.
+- The description says what changed and how it was checked. This repository is public: no internal links, ticket IDs, customer data or internal plans.
+- Don't commit agent guidance files (`AGENTS.md`, `CLAUDE.md`, `.claude/`, `.agents/rules/`). The whole repository is the plugin, and plugin directories refuse them.
 
 ## Releases
 
