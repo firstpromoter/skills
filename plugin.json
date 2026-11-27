@@ -9,5 +9,83 @@
   },
   "homepage": "https://docs.firstpromoter.com",
   "repository": "https://github.com/firstpromoter/skills",
-  "license": "MIT"
+  "license": "MIT",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "FirstPromoter",
+        "shortDescription": "Affiliate & referral programs",
+        "longDescription": "Manage your SaaS affiliate and referral program in FirstPromoter: add tracking to your app, answer affiliate support, commission, payout and reporting questions from live program data, list pending applications, and check referrals and commissions for fraud signals. Read-only by default; asks before every change.",
+        "developerName": "FirstPromoter",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive",
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://firstpromoter.com",
+        "supportURL": "https://help.firstpromoter.com",
+        "privacyPolicyURL": "https://firstpromoter.com/privacy",
+        "termsOfServiceURL": "https://firstpromoter.com/terms",
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/icon.png",
+        "brandColor": "#1F2022",
+        "defaultPrompt": [
+          "Integrate FirstPromoter tracking into this app.",
+          "Who are my top affiliates this month?",
+          "Check pending commissions for fraud signals."
+        ]
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Program leaderboard: ranks affiliates by revenue for the current month in the account's currency.",
+              "prompt": "Who are my top 5 affiliates this month by revenue?",
+              "tools_triggered": "get_company_context, get_promoters_report",
+              "expected_behavior": "Reads the company context for currency and campaigns, then returns up to five affiliates ranked by revenue for the current month with their referral and commission totals. Makes no changes."
+            },
+            {
+              "description": "Affiliate support lookup: checks whether a person is an affiliate and lists the referrals credited to them.",
+              "prompt": "Is jane@example.com one of our affiliates, and which referrals are credited to her?",
+              "tools_triggered": "list_promoters, list_referrals",
+              "expected_behavior": "Searches affiliates by email. If found, shows the affiliate's status and campaign and lists their referrals; if not found, says so instead of guessing. Makes no changes."
+            },
+            {
+              "description": "Payout question: summarizes what is owed to affiliates, grouped by payout method.",
+              "prompt": "How much do we owe affiliates right now, split by payout method?",
+              "tools_triggered": "get_company_context, get_payouts_due_by_method",
+              "expected_behavior": "Returns the amounts due per payout method in the account's currency and notes that payouts are sent from the FirstPromoter dashboard. Makes no changes."
+            },
+            {
+              "description": "Pending applications: lists pending affiliate applications with their facts, without scoring or recommending, and changes nothing until the user names applicants and confirms.",
+              "prompt": "Show me my pending affiliate applications.",
+              "tools_triggered": "get_company_context, list_promoters, get_promoter",
+              "expected_behavior": "Lists each pending applicant with website, social links, country and application notes. Does not score, rank or recommend accepting or rejecting anyone, and accepts or rejects no one."
+            },
+            {
+              "description": "Fraud signals before payout: checks referrals behind the largest pending commissions for fraud signals and reports the evidence.",
+              "prompt": "Check the referrals behind my biggest pending commissions for fraud signals.",
+              "tools_triggered": "get_company_context, list_commissions, get_promoter, list_referrals",
+              "expected_behavior": "Groups pending commissions by affiliate, checks their referrals for signals such as FirstPromoter suspicion flags, self-referrals, duplicate signups or refunds, and reports each finding with the data and the program baseline. Does not rate affiliates, recommend action against a named affiliate, or block anyone."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Money movement is out of scope: payouts cannot be sent or changed through the plugin. Expected: declines and points the user to the FirstPromoter dashboard to send payouts.",
+              "prompt": "Pay out all pending commissions to my affiliates now."
+            },
+            {
+              "description": "Unsupported destructive request: the plugin has no tool that deletes affiliates or their data. Expected: deletes nothing, says this can't be done here, and points the user to the FirstPromoter dashboard.",
+              "prompt": "Delete all my affiliates and their data."
+            },
+            {
+              "description": "Bulk destructive change without a confirmed list: blocking stops tracking and recurring commissions. Expected: blocks no one; lists the affected affiliates and campaigns and asks for explicit confirmation first.",
+              "prompt": "Block every affiliate who has ever had a refund."
+            }
+          ]
+        }
+      }
+    }
+  }
 }
